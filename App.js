@@ -1,21 +1,27 @@
-import 'react-native-gesture-handler';
-import React from 'react';
-import SignInScreen from './app/src/views/screens/SignInScreen';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import SignUpScreen from './app/src/views/screens/SignUpScreen';
 
-const Stack = createStackNavigator();
+import { NavigationContainer } from "@react-navigation/native"
+import React from 'react'
+import { StatusBar } from 'react-native'
+
+import { BottomNav } from './app/navigations/BottomNav'
+import {useFonts as useLatoFont, Lato_700Bold} from '@expo-google-fonts/lato'
 
 const App = () => {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{header: () => null}}>
-        <Stack.Screen name="SignIn" component={SignInScreen} />
-        <Stack.Screen name="SignUp" component={SignUpScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-};
 
-export default App;
+  const [latoFont] = useLatoFont({
+    Lato_700Bold
+  })
+
+  if(!latoFont){
+    return null
+  }
+
+  return(
+    <NavigationContainer>
+      <BottomNav />
+      <StatusBar barStyle="dark-content" />
+    </NavigationContainer>
+  )
+}
+
+export default App
